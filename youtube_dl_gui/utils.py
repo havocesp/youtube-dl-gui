@@ -330,6 +330,19 @@ def get_pixmaps_dir():
     return None
 
 
+def get_data_dir():
+    search_dirs = [
+        os.path.join(absolute_path(sys.argv[0]), "data"),
+        os.path.join(os_path_dirname(__file__), "data")
+    ]
+
+    for directory in search_dirs:
+        if os_path_exists(directory):
+            return directory
+
+    return None
+
+
 def to_bytes(string):
     """Convert given youtube-dl size string to bytes."""
     value = 0.0

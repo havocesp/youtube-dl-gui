@@ -85,6 +85,7 @@ def main():
 
     app = wx.App()
     frame = MainFrame(opt_manager, log_manager)
+    frame.Center()
     frame.Show()
 
     if opt_manager.options["disable_update"] and not os_path_exists(youtubedl_path):

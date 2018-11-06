@@ -35,6 +35,7 @@ from .downloadmanager import (
 )
 
 from .utils import (
+    get_data_dir,
     get_pixmaps_dir,
     build_command,
     get_icon_file,
@@ -63,6 +64,7 @@ from .info import (
 
 from .version import __version__
 
+import wx.lib.agw.advancedsplash as AS
 
 class MainFrame(wx.Frame):
 
@@ -170,6 +172,15 @@ class MainFrame(wx.Frame):
         self.download_manager = None
         self.update_thread = None
         self.app_icon = None  #REFACTOR Get and set on __init__.py
+
+
+        # imagePath = os.path.join(get_data_dir(), "splash.jpeg")
+        # bitmap = wx.Bitmap(imagePath, wx.BITMAP_TYPE_JPEG)
+        # shadow = wx.WHITE
+        # splash = AS.AdvancedSplash(self, bitmap=bitmap, timeout=10000,
+        #                         agwStyle=AS.AS_TIMEOUT | AS.AS_CENTER_ON_SCREEN | AS.AS_SHADOW_BITMAP,
+        #                         shadowcolour=shadow)
+
 
         self._download_list = DownloadList()
 
