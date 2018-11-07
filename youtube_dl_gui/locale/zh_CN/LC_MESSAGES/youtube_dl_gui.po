@@ -361,7 +361,7 @@ msgstr "确认退出"
 
 #: youtube_dl_gui/optionsframe.py:323
 msgid "Confirm item deletion"
-msgstr ""
+msgstr "确认文件删除"
 
 #: youtube_dl_gui/optionsframe.py:324
 msgid "Inform me on download completion"
