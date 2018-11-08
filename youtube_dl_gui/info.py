@@ -49,4 +49,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <http://unlicense.org/>'''
 
 # the splash time n seconds
-__splashtime__ = 5
+__splash_time__ = 5
+
+__splash_ad_url__ = 'www.baidu.com'
+__bottom_ad_url__ = 'www.baidu.com'

@@ -3,6 +3,7 @@ import gettext
 import wx
 import webbrowser
 import wx.html
+import wx.lib.agw.hyperlink as hyperlink
 
 
 class Splash(wx.Frame):
@@ -28,7 +29,13 @@ class Splash(wx.Frame):
         # self.Bind(wx.EVT_BUTTON, self._quick_clost, self.button)
         
         self._skip = wx.StaticText(self, -1, "some txt here")
-        self.Bind(wx.EVT_LEFT_DCLICK, self._quick_clost, self._skip)
+        # self.Bind(wx.EVT_LEFT_DCLICK, self._quick_clost, self._skip)
+        self._skip_link = hyperlink.HyperLinkCtrl(self, -1, "wxPython Main Page", pos=(100, 100), URL="baidu.com")
+        self._skip_link.AutoBrowse(False)
+        self._skip_link.EnableRollover(True)
+        self._skip_link.SetUnderlines(False, False, True)
+        self._skip_link.Bind(wx.EVT_LEFT_UP, self._quick_clost)
+        
 
         self.Center()
 
@@ -41,7 +48,8 @@ class Splash(wx.Frame):
             self._skip.SetLabel(labelTxt)
             print self.count_down
         else:
-            self._close()
+            # self._close()
+            print "done"
 
     def _quick_clost(self, event):
         self._close()
