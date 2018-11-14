@@ -598,3 +598,7 @@ msgstr ""
 #: youtube_dl_gui/optionsframe.py:928
 msgid "Log Viewer"
 msgstr ""
+
+#: youtube_dl_gui/optionsframe.py:928
+msgid "Homepage"
+msgstr ""

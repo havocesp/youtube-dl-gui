@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 
 import os
 import gettext
+import webbrowser
 
 import wx
 from wx.lib.pubsub import setuparg1 #NOTE Should remove deprecated
@@ -59,7 +60,9 @@ from .info import (
     __licensefull__,
     __projecturl__,
     __appname__,
-    __author__
+    __author__,
+    __home_page_url__,
+    __home_page_name__
 )
 
 from .version import __version__
@@ -103,6 +106,7 @@ class MainFrame(wx.Frame):
     INFO_LABEL = _("Info")
     WELCOME_MSG = _("Welcome")
     WARNING_LABEL = _("Warning")
+    HOMEPAGE_LABEL = _("Homepage")
 
     ADD_LABEL = _("Add")
     DOWNLOAD_LIST_LABEL = _("Download list")
@@ -210,7 +214,8 @@ class MainFrame(wx.Frame):
            ("resume", "play_arrow_32px.png"),
            ("reload", "reload_32px.png"),
            ("settings", "settings_20px.png"),
-           ("stop", "stop_32px.png")
+           ("stop", "stop_32px.png"),
+           ("homepage", "homepage_20px.png")
         )
 
         self._bitmaps = {}
@@ -259,6 +264,9 @@ class MainFrame(wx.Frame):
 
         #REFACTOR Move to buttons_data
         self._settings_button = self._create_bitmap_button(self._bitmaps["settings"], (30, 30), self._on_settings)
+
+        self._homepage_button = self._create_bitmap_button(self._bitmaps["homepage"], (30, 30), self._on_homepage)
+        self._homepage_button.SetToolTip(wx.ToolTip(self.HOMEPAGE_LABEL))
 
         self._url_list = self._create_textctrl(wx.TE_MULTILINE | wx.TE_DONTWRAP, self._on_urllist_edit)
 
@@ -721,6 +729,9 @@ class MainFrame(wx.Frame):
         event_object_height = event.EventObject.GetSize()[1]
         event_object_pos = (event_object_pos[0], event_object_pos[1] + event_object_height)
         self.PopupMenu(self._settings_menu, event_object_pos)
+    
+    def _on_homepage(self, event):
+        webbrowser.open_new_tab(__home_page_url__)
 
     def _on_viewlog(self, event):
         if self.log_manager is None:
@@ -813,6 +824,8 @@ class MainFrame(wx.Frame):
         top_sizer = wx.BoxSizer(wx.HORIZONTAL)
         top_sizer.Add(self._url_text, 0, wx.ALIGN_BOTTOM | wx.BOTTOM, 5)
         top_sizer.AddSpacer((-1, -1), 1)
+        top_sizer.Add(self._homepage_button)
+        top_sizer.AddSpacer((5, -1))
         top_sizer.Add(self._settings_button)
         panel_sizer.Add(top_sizer, 0, wx.EXPAND)
 

@@ -107,7 +107,7 @@ class Splash(wx.Frame):
 
     def _onClickHtmlWindow(self, event):
         webbrowser.open_new_tab(__splash_ad_url__)
-        self.Close()
+        self._close()
 
     def _onClickHomepage(self, event):
         webbrowser.open_new_tab(__home_page_url__)

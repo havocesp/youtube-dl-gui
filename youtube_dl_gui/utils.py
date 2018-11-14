@@ -399,6 +399,6 @@ def get_default_lang():
     default_lang, _ = locale_getdefaultlocale()
 
     if not default_lang:
-        default_lang = "en_US"
+        default_lang = "zh_CN"
 
     return default_lang
