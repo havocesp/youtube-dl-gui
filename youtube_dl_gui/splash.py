@@ -8,7 +8,7 @@ import wx.lib.agw.hyperlink as hyperlink
 import wx.lib.buttons as buttons
 import wx.stc as stc
 
-from info import (
+from .info import (
     __splash_time__,
     __splash_min_size__,
     __splash_ad_url__,
@@ -17,13 +17,24 @@ from info import (
     __home_page_name__
 )
 
+from .utils import (
+    get_data_dir,
+    get_config_path,
+    get_locale_file,
+    os_path_exists,
+    YOUTUBEDL_BIN
+)
+
+from .mainframe import MainFrame
 
 class Splash(wx.Frame):
     count_down = __splash_time__
 
-    def __init__(self):
-        print "count down=", Splash.count_down
-        wx.Frame.__init__(self, None, title="splash", size=__splash_min_size__)
+    def __init__(self, opt_manager, log_manager, youtubedl_path):
+        wx.Frame.__init__(self, None, title="splash", size=opt_manager.options["main_win_size"])
+        self.optManager = opt_manager
+        self.logManager = log_manager
+        self.youtubedlPath = youtubedl_path
         
         # Set the Timer
         self._app_timer = wx.Timer(self)
@@ -31,8 +42,12 @@ class Splash(wx.Frame):
         self._app_timer.Start(1000)
 
         # add main show info
-        self.htmlView = wx.html2.WebView.New(self, size=__splash_min_size__, style=0)    # todo: remove the scroll bar
-        self.htmlView.LoadURL(__splash_ad_url__)
+        defaultWelcomePage = os.path.join(get_data_dir(), "index.html")
+        print defaultWelcomePage
+        self.htmlView = wx.html2.WebView.New(self, url=defaultWelcomePage, size=__splash_min_size__, 
+            backend=wx.html2.WebViewBackendDefault, style=wx.FRAME_FLOAT_ON_PARENT | wx.STAY_ON_TOP, 
+            name="splashMainWindow")    # todo: remove the scroll bar
+        # self.htmlView.LoadURL(__splash_ad_url__)
         self.htmlView.Bind(wx.html2.EVT_WEBVIEW_LOADED, self._onHtmlLoaded)
         
         # add skip link
@@ -74,30 +89,36 @@ class Splash(wx.Frame):
     def _onTimer(self, event):
         if self.count_down>0 :
             self.count_down = self.count_down - 1
-
             self._dynamicSkipLabel.SetLabel(bytes(self.count_down))
-            print self.count_down
         else:
-            print "done"
+            self._close()
 
     def _quickSkip(self, event):
         self._close()
 
     def _close(self):
         self.Close()
+        self._openMainFrame()
+        
 
     def _onHtmlLoaded(self, event):
-        # self.htmlView.Bind(wx.html2.EVT_WEBVIEW_NAVIGATING, self._onClickHtmlWindow)
+        self.htmlView.Bind(wx.html2.EVT_WEBVIEW_NAVIGATED, self._onClickHtmlWindow)
         self.htmlView.Bind(wx.html2.EVT_WEBVIEW_NEWWINDOW, self._onClickHtmlWindow)
 
     def _onClickHtmlWindow(self, event):
         webbrowser.open_new_tab(__splash_ad_url__)
+        self.Close()
 
     def _onClickHomepage(self, event):
         webbrowser.open_new_tab(__home_page_url__)
 
+    def _openMainFrame(self):
+        frame = MainFrame(self.optManager, self.logManager)
+        frame.Center()
+        frame.Show()
 
-app = wx.App()
-frame = Splash()
-frame.Show()
-app.MainLoop()
+        if self.optManager.options["disable_update"] and not os_path_exists(self.youtubedlPath):
+            wx.MessageBox(_("Failed to locate youtube-dl and updates are disabled"), _("Error"), wx.OK | wx.ICON_ERROR)
+            frame.close()
+
+

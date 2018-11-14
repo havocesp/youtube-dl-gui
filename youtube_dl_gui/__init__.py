@@ -77,6 +77,7 @@ except IOError:
 reload_strings()
 
 from .mainframe import MainFrame
+from .splash import Splash
 
 
 def main():
@@ -84,12 +85,17 @@ def main():
     youtubedl_path = os.path.join(opt_manager.options["youtubedl_path"], YOUTUBEDL_BIN)
 
     app = wx.App()
-    frame = MainFrame(opt_manager, log_manager)
-    frame.Center()
-    frame.Show()
 
-    if opt_manager.options["disable_update"] and not os_path_exists(youtubedl_path):
-        wx.MessageBox(_("Failed to locate youtube-dl and updates are disabled"), _("Error"), wx.OK | wx.ICON_ERROR)
-        frame.close()
+    splashFrame= Splash(opt_manager, log_manager, youtubedl_path)
+    splashFrame.Center()
+    splashFrame.Show()
+
+    # frame = MainFrame(opt_manager, log_manager)
+    # frame.Center()
+    # frame.Show()
+
+    # if opt_manager.options["disable_update"] and not os_path_exists(youtubedl_path):
+    #     wx.MessageBox(_("Failed to locate youtube-dl and updates are disabled"), _("Error"), wx.OK | wx.ICON_ERROR)
+    #     frame.close()
 
     app.MainLoop()

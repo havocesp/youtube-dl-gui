@@ -52,8 +52,8 @@ For more information, please refer to <http://unlicense.org/>'''
 __splash_time__ = 5
 __splash_min_size__ = (560, 360)
 
-__splash_ad_url__ = 'http://cn.bing.com'
-__bottom_ad_url__ = 'http://www.baidu.com'
+__splash_ad_url__ = 'https://cn.bing.com/'
+__bottom_ad_url__ = 'https://www.baidu.com'
 
 __home_page_url__ = 'http://www.baidu.com'
 __home_page_name__ = 'www.foreach.live'
