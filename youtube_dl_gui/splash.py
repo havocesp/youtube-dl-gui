@@ -12,7 +12,7 @@ from .info import (
     __splash_time__,
     __splash_min_size__,
     __splash_ad_url__,
-    __bottom_ad_url__,
+    __ad_bar_url__,
     __home_page_url__,
     __home_page_name__
 )
@@ -43,7 +43,6 @@ class Splash(wx.Frame):
 
         # add main show info
         defaultWelcomePage = os.path.join(get_data_dir(), "index.html")
-        print defaultWelcomePage
         self.htmlView = wx.html2.WebView.New(self, url=defaultWelcomePage, size=__splash_min_size__, 
             backend=wx.html2.WebViewBackendDefault, style=wx.FRAME_FLOAT_ON_PARENT | wx.STAY_ON_TOP, 
             name="splashMainWindow")    # todo: remove the scroll bar

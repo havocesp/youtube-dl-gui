@@ -287,6 +287,7 @@ class OptionsManager(object):
             'workers_number': 3,
             'locale_name': get_default_lang(),
             'main_win_size': (740, 490),
+            'main_win_bar_size': (740, 90),
             'opts_win_size': (640, 490),
             'selected_video_formats': ['webm', 'mp4'],
             'selected_audio_formats': ['mp3', 'm4a', 'vorbis'],

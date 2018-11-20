@@ -69,6 +69,9 @@ from .version import __version__
 
 import wx.lib.agw.advancedsplash as AS
 
+from .adbarframe import AdBarFrame
+
+
 class MainFrame(wx.Frame):
 
     """Main window class.
@@ -256,6 +259,9 @@ class MainFrame(wx.Frame):
 
         # Create options frame
         self._options_frame = OptionsFrame(self)
+
+        # Create bar frame 
+        self._adBarFrame = AdBarFrame(self)
 
         # Create frame components
         self._panel = wx.Panel(self)
@@ -862,6 +868,9 @@ class MainFrame(wx.Frame):
         bottom_sizer.Add(self._buttons["start"])
         panel_sizer.Add(bottom_sizer, 0, wx.EXPAND | wx.TOP, 5)
 
+        # add ad bar to sizer
+        panel_sizer.Add(self._adBarFrame, 0, wx.EXPAND, 5)
+
         main_sizer.Add(panel_sizer, 1, wx.ALL | wx.EXPAND, 10)
         self._panel.SetSizer(main_sizer)
 
@@ -1112,6 +1121,9 @@ class MainFrame(wx.Frame):
 
         self._options_frame.save_all_options()
         self.opt_manager.save_to_file()
+
+        # close the add bar
+        self._adBarFrame.Close()
 
         self.Destroy()
 

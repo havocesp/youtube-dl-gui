@@ -78,6 +78,7 @@ reload_strings()
 
 from .mainframe import MainFrame
 from .splash import Splash
+from .adbarframe import AdBarFrame
 
 
 def main():
@@ -90,12 +91,8 @@ def main():
     splashFrame.Center()
     splashFrame.Show()
 
-    # frame = MainFrame(opt_manager, log_manager)
-    # frame.Center()
-    # frame.Show()
-
-    # if opt_manager.options["disable_update"] and not os_path_exists(youtubedl_path):
-    #     wx.MessageBox(_("Failed to locate youtube-dl and updates are disabled"), _("Error"), wx.OK | wx.ICON_ERROR)
-    #     frame.close()
+    # adBarFrame = AdBarFrame(opt_manager)
+    # adBarFrame.Center()
+    # adBarFrame.Show()
 
     app.MainLoop()
