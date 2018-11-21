@@ -69,7 +69,7 @@ from .version import __version__
 
 import wx.lib.agw.advancedsplash as AS
 
-from .adbarframe import AdBarFrame
+from .adbarpanel import AdBarPanel
 
 
 class MainFrame(wx.Frame):
@@ -260,13 +260,13 @@ class MainFrame(wx.Frame):
         # Create options frame
         self._options_frame = OptionsFrame(self)
 
-        # Create bar frame 
-        self._adBarFrame = AdBarFrame(self)
-
         # Create frame components
         self._panel = wx.Panel(self)
 
         self._url_text = self._create_statictext(self.URLS_LABEL)
+
+        # Create bar frame 
+        self._adBarPanel = AdBarPanel(self._panel, self)
 
         #REFACTOR Move to buttons_data
         self._settings_button = self._create_bitmap_button(self._bitmaps["settings"], (30, 30), self._on_settings)
@@ -869,7 +869,9 @@ class MainFrame(wx.Frame):
         panel_sizer.Add(bottom_sizer, 0, wx.EXPAND | wx.TOP, 5)
 
         # add ad bar to sizer
-        panel_sizer.Add(self._adBarFrame, 0, wx.EXPAND, 5)
+        # the adBar always is the lastest item of panel_sizer
+        panel_sizer.Add(self._adBarPanel, 0, wx.EXPAND, 5)
+        self._mainPanelSizer = panel_sizer
 
         main_sizer.Add(panel_sizer, 1, wx.ALL | wx.EXPAND, 10)
         self._panel.SetSizer(main_sizer)
@@ -1123,7 +1125,7 @@ class MainFrame(wx.Frame):
         self.opt_manager.save_to_file()
 
         # close the add bar
-        self._adBarFrame.Close()
+        self._adBarPanel.Close()
 
         self.Destroy()
 
@@ -1255,7 +1257,7 @@ class ListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin):
             # Set auto-resize if enabled
             if column_item[3]:
                 self.setResizeColumn(column_item[0])
-
+    
 # REFACTOR Extra widgets below should move to other module with widgets
 
 class ExtComboBox(wx.ComboBox):

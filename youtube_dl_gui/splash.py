@@ -47,6 +47,7 @@ class Splash(wx.Frame):
             backend=wx.html2.WebViewBackendDefault, style=wx.FRAME_FLOAT_ON_PARENT | wx.STAY_ON_TOP, 
             name="splashMainWindow")    # todo: remove the scroll bar
         # self.htmlView.LoadURL(__splash_ad_url__)
+        
         self.htmlView.Bind(wx.html2.EVT_WEBVIEW_LOADED, self._onHtmlLoaded)
         
         # add skip link
@@ -80,6 +81,9 @@ class Splash(wx.Frame):
         frameSizer.Add(self.htmlView, 1, wx.EXPAND, 0)
         frameSizer.Add(self._skipLinkPanel, 0, wx.EXPAND, 0)
 
+        # create main frame 
+        self._frame = MainFrame(self.optManager, self.logManager)
+
         self.SetSizer(frameSizer)
         self.Center()
         self.SetMinSize(__splash_min_size__)
@@ -105,19 +109,19 @@ class Splash(wx.Frame):
         self.htmlView.Bind(wx.html2.EVT_WEBVIEW_NEWWINDOW, self._onClickHtmlWindow)
 
     def _onClickHtmlWindow(self, event):
-        webbrowser.open_new_tab(__splash_ad_url__)
+        url = event.GetURL()
+        webbrowser.open_new_tab(url)
         self._close()
 
     def _onClickHomepage(self, event):
         webbrowser.open_new_tab(__home_page_url__)
 
     def _openMainFrame(self):
-        frame = MainFrame(self.optManager, self.logManager)
-        frame.Center()
-        frame.Show()
+        self._frame.Center()
+        self._frame.Show()
 
         if self.optManager.options["disable_update"] and not os_path_exists(self.youtubedlPath):
             wx.MessageBox(_("Failed to locate youtube-dl and updates are disabled"), _("Error"), wx.OK | wx.ICON_ERROR)
-            frame.close()
+            self._frame.close()
 
 

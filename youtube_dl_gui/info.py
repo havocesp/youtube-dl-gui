@@ -51,10 +51,10 @@ For more information, please refer to <http://unlicense.org/>'''
 # the splash time n seconds
 __splash_time__ = 5
 __splash_min_size__ = (560, 360)
-__splash_ad_url__ = 'https://cn.bing.com/'
+__splash_ad_url__ = 'https://www.google.com'
 
-__ad_bar_url__ = 'https://www.baidu.com'
-__ad_bar_min_size__ = (560, 68)
+__ad_bar_url__ = 'https://www.google.com'
+__ad_bar_min_size__ = (560, 60)
 
-__home_page_url__ = 'http://www.baidu.com'
+__home_page_url__ = 'https://www.google.com'
 __home_page_name__ = 'www.foreach.live'

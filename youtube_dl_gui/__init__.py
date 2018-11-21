@@ -78,7 +78,6 @@ reload_strings()
 
 from .mainframe import MainFrame
 from .splash import Splash
-from .adbarframe import AdBarFrame
 
 
 def main():
@@ -90,9 +89,5 @@ def main():
     splashFrame= Splash(opt_manager, log_manager, youtubedl_path)
     splashFrame.Center()
     splashFrame.Show()
-
-    # adBarFrame = AdBarFrame(opt_manager)
-    # adBarFrame.Center()
-    # adBarFrame.Show()
 
     app.MainLoop()
