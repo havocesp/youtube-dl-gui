@@ -8,16 +8,6 @@ import wx.lib.agw.hyperlink as hyperlink
 import wx.lib.buttons as buttons
 import wx.stc as stc
 
-from .info import (
-    __splash_time__,
-    __splash_min_size__,
-    __splash_ad_url__,
-    __ad_bar_url__,
-    __ad_bar_min_size__,
-    __home_page_url__,
-    __home_page_name__
-)
-
 from .utils import (
     get_data_dir,
     get_config_path,
@@ -28,25 +18,27 @@ from .utils import (
 
 
 class AdBarPanel(wx.Panel):
-    def __init__(self, parent, rootFrame):
+    def __init__(self, parent, rootFrame, opt_manager):
         wx.Panel.__init__(self, parent, -1, style=0)
         self._parent = parent
         self._rootFrame = rootFrame
+        self._optManager = opt_manager
         
         # add main show info
         defaultAdBarPage = os.path.join(get_data_dir(), "adBar.html")
 
-        self.htmlView = wx.html2.WebView.New(self, url=defaultAdBarPage, size=__ad_bar_min_size__, 
+        self.htmlView = wx.html2.WebView.New(self, url=defaultAdBarPage, size=self._optManager.options["ad_bar_min_size"], 
             backend=wx.html2.WebViewBackendDefault, style=0, 
             name="adBarMainWindow")    
-        # self.htmlView.LoadURL(__ad_bar_url__)
+        # self.htmlView.LoadURL(self._optManager.options["ad_bar_url"])
 
         self.htmlView.Bind(wx.html2.EVT_WEBVIEW_LOADED, self._onHtmlLoaded)
 
         frameSizer = wx.BoxSizer(wx.VERTICAL) 
         frameSizer.Add(self.htmlView, 0, wx.EXPAND, 0)
+        self._frameSizer = frameSizer
         self.SetSizer(frameSizer)
-        self.SetMinSize(__ad_bar_min_size__)
+        self.SetMinSize(self._optManager.options["ad_bar_min_size"])
 
 
     def _close(self):
@@ -65,8 +57,9 @@ class AdBarPanel(wx.Panel):
         # the adBar always is the lastest item
         adBarIndex = self._rootFrame._mainPanelSizer.GetItemCount() - 1
         self._rootFrame._mainPanelSizer.Remove(adBarIndex)
-        self._rootFrame._adBarPanel.Close()
         self._rootFrame._mainPanelSizer.Layout()
+        self._close()
+        
         
         
 

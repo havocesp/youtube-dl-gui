@@ -8,15 +8,6 @@ import wx.lib.agw.hyperlink as hyperlink
 import wx.lib.buttons as buttons
 import wx.stc as stc
 
-from .info import (
-    __splash_time__,
-    __splash_min_size__,
-    __splash_ad_url__,
-    __ad_bar_url__,
-    __home_page_url__,
-    __home_page_name__
-)
-
 from .utils import (
     get_data_dir,
     get_config_path,
@@ -28,13 +19,12 @@ from .utils import (
 from .mainframe import MainFrame
 
 class Splash(wx.Frame):
-    count_down = __splash_time__
-
     def __init__(self, opt_manager, log_manager, youtubedl_path):
         wx.Frame.__init__(self, None, title="splash", size=opt_manager.options["main_win_size"])
         self.optManager = opt_manager
         self.logManager = log_manager
         self.youtubedlPath = youtubedl_path
+        self.count_down = opt_manager.options["splash_time"]
         
         # Set the Timer
         self._app_timer = wx.Timer(self)
@@ -43,11 +33,11 @@ class Splash(wx.Frame):
 
         # add main show info
         defaultWelcomePage = os.path.join(get_data_dir(), "index.html")
-        self.htmlView = wx.html2.WebView.New(self, url=defaultWelcomePage, size=__splash_min_size__, 
+        self.htmlView = wx.html2.WebView.New(self, url=defaultWelcomePage, size=opt_manager.options["splash_min_size"], 
             backend=wx.html2.WebViewBackendDefault, style=wx.FRAME_FLOAT_ON_PARENT | wx.STAY_ON_TOP, 
             name="splashMainWindow")    # todo: remove the scroll bar
-        # self.htmlView.LoadURL(__splash_ad_url__)
-        
+        # self.htmlView.LoadURL(opt_manager.options["splash_ad_url"])
+
         self.htmlView.Bind(wx.html2.EVT_WEBVIEW_LOADED, self._onHtmlLoaded)
         
         # add skip link
@@ -63,7 +53,7 @@ class Splash(wx.Frame):
         self._dynamicSkipLabel.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD))
         self._dynamicSkipLabel.Bind(wx.EVT_LEFT_UP, self._quickSkip)
 
-        self._homePageLink = hyperlink.HyperLinkCtrl(self._skipLinkPanel, -1, __home_page_name__)
+        self._homePageLink = hyperlink.HyperLinkCtrl(self._skipLinkPanel, -1, opt_manager.options["home_page_name"])
         self._homePageLink.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.BOLD))
         self._homePageLink.AutoBrowse(False)
         self._homePageLink.EnableRollover(True)
@@ -86,7 +76,7 @@ class Splash(wx.Frame):
 
         self.SetSizer(frameSizer)
         self.Center()
-        self.SetMinSize(__splash_min_size__)
+        self.SetMinSize(opt_manager.options["splash_min_size"])
        
 
     def _onTimer(self, event):
@@ -114,7 +104,7 @@ class Splash(wx.Frame):
         self._close()
 
     def _onClickHomepage(self, event):
-        webbrowser.open_new_tab(__home_page_url__)
+        webbrowser.open_new_tab(self.optManager.options["home_page_url"])
 
     def _openMainFrame(self):
         self._frame.Center()

@@ -60,9 +60,7 @@ from .info import (
     __licensefull__,
     __projecturl__,
     __appname__,
-    __author__,
-    __home_page_url__,
-    __home_page_name__
+    __author__
 )
 
 from .version import __version__
@@ -266,7 +264,7 @@ class MainFrame(wx.Frame):
         self._url_text = self._create_statictext(self.URLS_LABEL)
 
         # Create bar frame 
-        self._adBarPanel = AdBarPanel(self._panel, self)
+        self._adBarPanel = AdBarPanel(self._panel, self, self.opt_manager)
 
         #REFACTOR Move to buttons_data
         self._settings_button = self._create_bitmap_button(self._bitmaps["settings"], (30, 30), self._on_settings)
@@ -737,7 +735,7 @@ class MainFrame(wx.Frame):
         self.PopupMenu(self._settings_menu, event_object_pos)
     
     def _on_homepage(self, event):
-        webbrowser.open_new_tab(__home_page_url__)
+        webbrowser.open_new_tab(self.opt_manager.options["home_page_url"])
 
     def _on_viewlog(self, event):
         if self.log_manager is None:
