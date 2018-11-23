@@ -78,6 +78,7 @@ reload_strings()
 
 from .mainframe import MainFrame
 from .splash import Splash
+from .terms import Terms
 
 
 def main():
@@ -86,8 +87,12 @@ def main():
 
     app = wx.App()
 
-    splashFrame= Splash(opt_manager, log_manager, youtubedl_path)
-    splashFrame.Center()
-    splashFrame.Show()
+    # splashFrame= Splash(opt_manager, log_manager, youtubedl_path)
+    # splashFrame.Center()
+    # splashFrame.Show()
+
+    terms = Terms(opt_manager, log_manager, youtubedl_path)
+    terms.Center()
+    terms.Show()
 
     app.MainLoop()
