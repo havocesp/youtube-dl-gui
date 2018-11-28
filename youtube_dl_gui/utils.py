@@ -402,3 +402,20 @@ def get_default_lang():
         default_lang = "zh_CN"
 
     return default_lang
+
+def hostname():  
+        sys = os.name  
+  
+        if sys == 'nt':  
+                hostname = os.getenv('computername')  
+                return hostname  
+  
+        elif sys == 'posix':  
+                host = os.popen('echo $HOSTNAME')  
+                try:  
+                        hostname = host.read()  
+                        return hostname  
+                finally:  
+                        host.close()  
+        else:  
+                return 'Unkwon hostname'  

@@ -51,6 +51,7 @@ from .utils import (
     get_config_path,
     get_locale_file,
     os_path_exists,
+    hostname,
     YOUTUBEDL_BIN
 )
 
@@ -87,12 +88,16 @@ def main():
 
     app = wx.App()
 
-    # splashFrame= Splash(opt_manager, log_manager, youtubedl_path)
-    # splashFrame.Center()
-    # splashFrame.Show()
-
-    terms = Terms(opt_manager, log_manager, youtubedl_path)
-    terms.Center()
-    terms.Show()
+    # opt_manager.options["terms_status"] = 'some thing'
+    # if user not sign the terms, shoul pop up the terms
+    if not opt_manager.options["terms_status"] :
+        opt_manager.options["terms_status"] = hostname()
+        terms = Terms(opt_manager, log_manager, youtubedl_path)
+        terms.Center()
+        terms.Show()
+    else:
+        splashFrame= Splash(opt_manager, log_manager, youtubedl_path)
+        splashFrame.Center()
+        splashFrame.Show()
 
     app.MainLoop()

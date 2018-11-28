@@ -1,3 +1,5 @@
+#coding=utf-8
+
 import os
 import gettext
 import wx
@@ -16,7 +18,16 @@ from .utils import (
     YOUTUBEDL_BIN
 )
 
-# from .mainframe import MainFrame
+from .info import (
+    __license_CN__,
+    __licensefull__
+)
+
+from locale import (
+    getlocale
+)
+
+from .mainframe import MainFrame
 
 class Terms(wx.Frame):
     def __init__(self, opt_manager, log_manager, youtubedl_path):
@@ -25,52 +36,69 @@ class Terms(wx.Frame):
         self.logManager = log_manager
         self.youtubedlPath = youtubedl_path
 
-        mainTermsText = wx.TextCtrl(self, -1, value="xxx", 
+        fullText = __licensefull__ + '\n'
+        argeeLable = 'Agree'
+        disagreeLable = 'disagree'
+
+        if opt_manager.options["locale_name"] == 'zh_CN' :
+            fullText = __license_CN__ + '\n'
+            argeeLable = u'同意'
+            disagreeLable = u'不同意'
+
+        mainTermsText = wx.TextCtrl(self, -1, value=fullText, size=opt_manager.options["main_win_size"], 
             style= wx.TE_MULTILINE | wx.TE_READONLY | wx.TE_RICH2 | wx.TE_BESTWRAP, name="Terms of Use Text")
 
-        agreeButton = wx.Button(self, -1, label="Agree")
+        agreeButton = wx.Button(self, -1, label=argeeLable)
         self.Bind(wx.EVT_BUTTON, self._onAgree, agreeButton)
 
-        disagreeButton = wx.Button(self, -1, label="Disagree")
+        disagreeButton = wx.Button(self, -1, label=disagreeLable)
         self.Bind(wx.EVT_BUTTON, self._onDisagree, disagreeButton)
 
         textSizer = wx.BoxSizer(wx.VERTICAL) 
-        textSizer.Add(mainTermsText, 0, wx.EXPAND, 0)
+        textSizer.Add(mainTermsText, 0, wx.EXPAND | wx.ALL, 0)
 
         buttonSizer = wx.BoxSizer(wx.HORIZONTAL) 
-        buttonSizer.Add(agreeButton,0 , wx.EXPAND, 0)
-        buttonSizer.AddSpacer((10, -1))
-        buttonSizer.Add(disagreeButton,0 , wx.EXPAND, 0)
+        buttonSizer.Add((20,20), 1)
+        buttonSizer.Add(agreeButton,0 , wx.EXPAND | wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 0)
+        buttonSizer.Add((10,10), 1)
+        buttonSizer.Add(disagreeButton,0 , wx.EXPAND | wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 0)
+        buttonSizer.Add((20,20), 1)
 
         frameSizer = wx.BoxSizer(wx.VERTICAL) 
-        frameSizer.Add(textSizer, 1, wx.EXPAND, 0)
-        frameSizer.Add(buttonSizer, 0, wx.EXPAND, 0)
+        frameSizer.Add(textSizer, 0, wx.EXPAND | wx.ALL, 0)
+        frameSizer.Add(buttonSizer, 0, wx.EXPAND | wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 0)
 
         # create main frame 
-        # self._frame = MainFrame(self.optManager, self.logManager)
+        self._frame = MainFrame(self.optManager, self.logManager)
 
         self.SetSizer(frameSizer)
         self.Center()
         self.SetMinSize(opt_manager.options["main_win_size"])
 
+        frameSizer.Fit(self)
+        frameSizer.SetSizeHints(self)
 
     def _onAgree(self, event):
-        print "yes"
+        self._openMainFrame()
 
     def _onDisagree(self, event):
+        self._frame.Close()
         self._close()
 
     def _close(self):
         self.Close()
-        # self._openMainFrame()
         
 
-    # def _openMainFrame(self):
-    #     self._frame.Center()
-    #     self._frame.Show()
+    def _openMainFrame(self):
+        # save the info to option Manager
 
-    #     if self.optManager.options["disable_update"] and not os_path_exists(self.youtubedlPath):
-    #         wx.MessageBox(_("Failed to locate youtube-dl and updates are disabled"), _("Error"), wx.OK | wx.ICON_ERROR)
-    #         self._frame.close()
+        self._frame.Center()
+        self._frame.Show()
+
+        self._close()
+
+        if self.optManager.options["disable_update"] and not os_path_exists(self.youtubedlPath):
+            wx.MessageBox(_("Failed to locate youtube-dl and updates are disabled"), _("Error"), wx.OK | wx.ICON_ERROR)
+            self._frame.close()
 
 

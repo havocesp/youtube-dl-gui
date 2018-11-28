@@ -42,6 +42,7 @@ class AdBarPanel(wx.Panel):
 
 
     def _close(self):
+        self.htmlView.Close()
         self.Close()
 
     def _onHtmlLoaded(self, event):
@@ -56,8 +57,10 @@ class AdBarPanel(wx.Panel):
     def _removeAdBar(self):
         # the adBar always is the lastest item
         adBarIndex = self._rootFrame._mainPanelSizer.GetItemCount() - 1
+        self._rootFrame._mainPanelSizer.GetItem(adBarIndex).Show(False)
         self._rootFrame._mainPanelSizer.Remove(adBarIndex)
         self._rootFrame._mainPanelSizer.Layout()
+        # self._rootFrame._mainPanelSizer.Fit(self._rootFrame)
         self._close()
         
         

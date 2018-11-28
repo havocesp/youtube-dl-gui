@@ -308,7 +308,8 @@ class OptionsManager(object):
             'ad_bar_url': 'https://www.google.com',
             'ad_bar_min_size': (560, 60),
             'home_page_url': 'https://www.google.com',
-            'home_page_name': 'www.foreach.live'
+            'home_page_name': 'www.foreach.live',
+            'terms_status': ''
         }
 
         # Set the youtubedl_path again if the disable_update option is set

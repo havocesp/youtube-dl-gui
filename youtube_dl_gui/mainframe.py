@@ -58,6 +58,7 @@ from .formats import (
 from .info import (
     __descriptionfull__,
     __licensefull__,
+    __license_CN__,
     __projecturl__,
     __appname__,
     __author__
@@ -757,8 +758,12 @@ class MainFrame(wx.Frame):
         info.SetVersion(__version__)
         info.SetDescription(__descriptionfull__)
         info.SetWebSite(__projecturl__)
-        info.SetLicense(__licensefull__)
-        info.AddDeveloper(__author__)
+        info.AddDeveloper(self.opt_manager.options["home_page_url"])
+
+        if self.opt_manager.options["locale_name"] == 'zh_CN' :
+            info.SetLicense(__license_CN__)
+        else:
+            info.SetLicense(__licensefull__)
 
         wx.AboutBox(info)
 
