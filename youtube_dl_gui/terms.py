@@ -30,6 +30,9 @@ from locale import (
 from .mainframe import MainFrame
 
 class Terms(wx.Frame):
+    AGREE_LABEL = _("Agree")
+    DISAGREE_LABEL = _("Disagree")
+
     def __init__(self, opt_manager, log_manager, youtubedl_path):
         wx.Frame.__init__(self, None, title="Terms of Use", size=opt_manager.options["main_win_size"])
         self.optManager = opt_manager
@@ -37,22 +40,19 @@ class Terms(wx.Frame):
         self.youtubedlPath = youtubedl_path
         self.Bind(wx.EVT_CLOSE ,self._on_close)
 
+        # REFACTOR : can be set in Locale/PO
+        #            we do not set here for the info is too long, and license only support en and zh for now
         fullText = __licensefull__ + '\n'
-        argeeLable = 'Agree'
-        disagreeLable = 'Disagree'
-
         if opt_manager.options["locale_name"] == 'zh_CN' :
             fullText = __license_CN__ + '\n'
-            argeeLable = u'同意'
-            disagreeLable = u'不同意'
 
         mainTermsText = wx.TextCtrl(self, -1, value=fullText, size=opt_manager.options["main_win_size"], 
             style= wx.TE_MULTILINE | wx.TE_READONLY | wx.TE_RICH2 | wx.TE_BESTWRAP, name="Terms of Use Text")
 
-        agreeButton = wx.Button(self, -1, label=argeeLable)
+        agreeButton = wx.Button(self, -1, label=self.AGREE_LABEL)
         self.Bind(wx.EVT_BUTTON, self._onAgree, agreeButton)
 
-        disagreeButton = wx.Button(self, -1, label=disagreeLable)
+        disagreeButton = wx.Button(self, -1, label=self.DISAGREE_LABEL)
         self.Bind(wx.EVT_BUTTON, self._onDisagree, disagreeButton)
 
         textSizer = wx.BoxSizer(wx.VERTICAL) 

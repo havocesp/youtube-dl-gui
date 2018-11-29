@@ -602,3 +602,11 @@ msgstr ""
 #: youtube_dl_gui/optionsframe.py:928
 msgid "Homepage"
 msgstr "首页"
+
+#: youtube_dl_gui/terms.py:46
+msgid "Agree"
+msgstr "同意"
+
+#: youtube_dl_gui/terms.py:46
+msgid "Disagree"
+msgstr "不同意"
