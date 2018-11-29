@@ -20,7 +20,7 @@ from .utils import (
 
 from .info import (
     __license_CN__,
-    __licensefull__
+    __license_US__
 )
 
 from locale import (
@@ -42,7 +42,7 @@ class Terms(wx.Frame):
 
         # REFACTOR : can be set in Locale/PO
         #            we do not set here for the info is too long, and license only support en and zh for now
-        fullText = __licensefull__ + '\n'
+        fullText = __license_US__ + '\n'
         if opt_manager.options["locale_name"] == 'zh_CN' :
             fullText = __license_CN__ + '\n'
 

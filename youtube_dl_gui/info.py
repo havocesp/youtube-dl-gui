@@ -14,7 +14,7 @@ __author__ = 'www.homepage.com'
 __contact__ = 'ytubedlg@gmail.com'
 __projecturl__ = 'https://mrs0m30n3.github.io/youtube-dl-gui/'
 
-__appname__ = 'Online-Video-Downloader'
+__appname__ = 'Online-Video-Download'
 __license__ = 'MPL'
 
 __description__ = 'A free downloader for online video'
@@ -25,17 +25,11 @@ __licensefull__ = '''
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
+distribute this software, as a compiled binary.
 
 In jurisdictions that recognize copyright laws, the author or authors
 of this software dedicate any and all copyright interest in the
-software to the public domain. We make this dedication for the benefit
-of the public at large and to the detriment of our heirs and
-successors. We intend this dedication to be an overt act of
-relinquishment in perpetuity of all present and future rights to this
-software under copyright law.
+software to the public domain. 
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
@@ -44,8 +38,28 @@ IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
 OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
+'''
 
-For more information, please refer to <http://unlicense.org/>'''
+__license_US__='''Online Video Download Software License Agreement
+This agreement is a legal agreement between you and Online Video Download Development Group (Online Video Download) with respect to the use of the Online Video Download Software (Software).
+By using the Software, you acknowledge that you and such use are bound by and subject to the provisions of this agreement without modifications. If you do not accept these terms of use in their entirety, you may not access or use the Software.
+
+1.The Software is being licensed to you free of charge for your private personal use only. The Software is licensed, not sold. You may use the Software for non-commercial purposes only.
+
+2.You may not use the Software in support of any commercial entity or activity without the express written agreement of Online Video Download. By way of example, and not as a limitation, charging others to use the Software either directly or indirectly, using the Software to sell any goods or services.
+
+3.The Software is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties. You will not disassemble, decompile, or reverse engineer the Software. Any unauthorized reproduction or redistribution of the Software is expressly prohibited by law, and may result in severe civil and criminal penalties.
+
+4.You are responsible for all activities that occur in your use of the Software. You represent and warrant that you will use the Software only for lawful purposes and in accordance with this agreement, and that you will not use the Software to violate any law, regulation or ordinance or any right of Online Video Download or any third party, including, without limitation, any right of privacy, publicity, copyright, patent or trademark. Online Video Download will not be responsible for these activities.
+
+5.The Software is distributed "AS IS". No warranty or any kind is expressed or implied. You use at your own risk. Online Video Download will not be liable for data loss, damages, loss of profits or any other kind of loss while using or misusing this software.
+
+6.We may provide some content on the Software or the official websites. We are not responsible for any third party content you access with the Software or our websites. The Software may let you connect with third-party sites and services, which we call “links” and “tabs.” We provide these links and tabs as a convenience to you, but we do not control third-party links and tabs and are not responsible for them. You are solely responsible for your dealings with any third party, including your damage or cost.
+
+7.The Software may exchange data or information with some third parties, including trackers and other users, while downloading files. All these data and information are anonymous, in which your personal information is not contained. And the Online Video Download itself do not collect these data or information. Also, Online Video Download do not collect or reveal your privacy in any form.
+
+8.If any part of this agreement is held invalid or unenforceable, that portion shall be construed in a manner consistent with applicable law to reflect, as nearly as possible, the original intentions of the parties, and the remaining portions shall remain in full force and effect.
+'''
 
 __license_CN__ = ''' 软件许可协议：
 
