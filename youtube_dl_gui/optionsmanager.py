@@ -373,6 +373,10 @@ class OptionsManager(object):
         settings_dictionary['main_win_size'] = decode_tuple(settings_dictionary['main_win_size'])
         settings_dictionary['opts_win_size'] = decode_tuple(settings_dictionary['opts_win_size'])
 
+        settings_dictionary['main_win_bar_size'] = decode_tuple(settings_dictionary['main_win_bar_size'])
+        settings_dictionary['splash_min_size'] = decode_tuple(settings_dictionary['splash_min_size'])
+        settings_dictionary['ad_bar_min_size'] = decode_tuple(settings_dictionary['ad_bar_min_size'])
+
         for key in self.options:
             if key not in settings_dictionary:
                 return False
@@ -421,6 +425,10 @@ class OptionsManager(object):
         # Encode normal tuples to string formatted tuples
         temp_options['main_win_size'] = encode_tuple(temp_options['main_win_size'])
         temp_options['opts_win_size'] = encode_tuple(temp_options['opts_win_size'])
+
+        temp_options['main_win_bar_size'] = encode_tuple(temp_options['main_win_bar_size'])
+        temp_options['splash_min_size'] = encode_tuple(temp_options['splash_min_size'])
+        temp_options['ad_bar_min_size'] = encode_tuple(temp_options['ad_bar_min_size'])
 
         return temp_options
 

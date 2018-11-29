@@ -49,6 +49,7 @@ from .optionsmanager import OptionsManager
 
 from .utils import (
     get_config_path,
+    get_data_dir,
     get_locale_file,
     os_path_exists,
     hostname,
@@ -57,7 +58,9 @@ from .utils import (
 
 
 # Set config path and create options and log managers
-config_path = get_config_path()
+# config_path = get_config_path()
+config_path = get_data_dir()
+
 
 opt_manager = OptionsManager(config_path)
 log_manager = None

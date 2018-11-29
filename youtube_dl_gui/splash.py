@@ -25,6 +25,7 @@ class Splash(wx.Frame):
         self.logManager = log_manager
         self.youtubedlPath = youtubedl_path
         self.count_down = opt_manager.options["splash_time"]
+        self.Bind(wx.EVT_CLOSE, self._on_close)
         
         # Set the Timer
         self._app_timer = wx.Timer(self)
@@ -90,10 +91,14 @@ class Splash(wx.Frame):
         self._close()
 
     def _close(self):
-        self.Close()
         self._openMainFrame()
-        
+        self.Destroy()
 
+    def _on_close(self, event):
+        if self._frame :
+            self._frame.Destroy()
+        self.Destroy()
+        
     def _onHtmlLoaded(self, event):
         self.htmlView.Bind(wx.html2.EVT_WEBVIEW_NAVIGATED, self._onClickHtmlWindow)
         self.htmlView.Bind(wx.html2.EVT_WEBVIEW_NEWWINDOW, self._onClickHtmlWindow)
@@ -113,5 +118,5 @@ class Splash(wx.Frame):
         if self.optManager.options["disable_update"] and not os_path_exists(self.youtubedlPath):
             wx.MessageBox(_("Failed to locate youtube-dl and updates are disabled"), _("Error"), wx.OK | wx.ICON_ERROR)
             self._frame.close()
-
-
+        
+    

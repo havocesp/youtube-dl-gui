@@ -35,10 +35,11 @@ class Terms(wx.Frame):
         self.optManager = opt_manager
         self.logManager = log_manager
         self.youtubedlPath = youtubedl_path
+        self.Bind(wx.EVT_CLOSE ,self._on_close)
 
         fullText = __licensefull__ + '\n'
         argeeLable = 'Agree'
-        disagreeLable = 'disagree'
+        disagreeLable = 'Disagree'
 
         if opt_manager.options["locale_name"] == 'zh_CN' :
             fullText = __license_CN__ + '\n'
@@ -66,7 +67,9 @@ class Terms(wx.Frame):
 
         frameSizer = wx.BoxSizer(wx.VERTICAL) 
         frameSizer.Add(textSizer, 0, wx.EXPAND | wx.ALL, 0)
+        frameSizer.Add((10,10), 1)
         frameSizer.Add(buttonSizer, 0, wx.EXPAND | wx.ALL | wx.ALIGN_CENTER_HORIZONTAL, 0)
+        frameSizer.Add((10,10), 1)
 
         # create main frame 
         self._frame = MainFrame(self.optManager, self.logManager)
@@ -80,22 +83,20 @@ class Terms(wx.Frame):
 
     def _onAgree(self, event):
         self._openMainFrame()
+        self.Destroy()
 
     def _onDisagree(self, event):
-        self._frame.Close()
-        self._close()
+        self._frame.Destroy()
+        self.Destroy()
 
-    def _close(self):
-        self.Close()
-        
+    def _on_close(self, event):
+        if self._frame :
+            self._frame.Destroy()
+        self.Destroy()
 
     def _openMainFrame(self):
-        # save the info to option Manager
-
         self._frame.Center()
         self._frame.Show()
-
-        self._close()
 
         if self.optManager.options["disable_update"] and not os_path_exists(self.youtubedlPath):
             wx.MessageBox(_("Failed to locate youtube-dl and updates are disabled"), _("Error"), wx.OK | wx.ICON_ERROR)
