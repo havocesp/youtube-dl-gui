@@ -610,3 +610,7 @@ msgstr "同意"
 #: youtube_dl_gui/terms.py:46
 msgid "Disagree"
 msgstr "不同意"
+
+#: youtube_dl_gui/mainframe.py:128
+msgid "If download failed or have some error, please try to update the resolver in option card(right corner)"
+msgstr "如果下载不成功或者出错了，请尝试在选项卡中（右上角），选择‘更新’尝试解决"

@@ -11,7 +11,7 @@ Note:
 from __future__ import unicode_literals
 
 __author__ = 'www.homepage.com'
-__contact__ = 'ytubedlg@gmail.com'
+__contact__ = 'onlinedownload88'
 __projecturl__ = 'https://mrs0m30n3.github.io/youtube-dl-gui/'
 
 __appname__ = 'Online-Video-Download'

@@ -152,6 +152,8 @@ class MainFrame(wx.Frame):
     ETA_LABEL = _("ETA")
     SPEED_LABEL = _("Speed")
     STATUS_LABEL = _("Status")
+
+    NOTICE_UPDATE_INFO = _("If download failed or have some error, please try to update the resolver in option card(right corner)")
     #################################
 
     # STATUSLIST_COLUMNS
@@ -334,7 +336,7 @@ class MainFrame(wx.Frame):
         self.Center()
         self.SetMinSize(self.FRAMES_MIN_SIZE)
 
-        self._status_bar_write(self.WELCOME_MSG)
+        self._status_bar_write(self.WELCOME_MSG + " : " + self.NOTICE_UPDATE_INFO )
 
         self._update_videoformat_combobox()
         self._path_combobox.LoadMultiple(self.opt_manager.options["save_path_dirs"])
@@ -450,6 +452,7 @@ class MainFrame(wx.Frame):
                 completed += 1
             if item.stage == "Error":
                 error += 1
+                self._status_bar_write(self.NOTICE_UPDATE_INFO)
 
         # REFACTOR Store percentage as float in the DownloadItem?
         # REFACTOR DownloadList keep track for each item stage?
@@ -1026,6 +1029,7 @@ class MainFrame(wx.Frame):
             self._buttons["start"].SetLabel(self.STOP_LABEL)
             self._buttons["start"].SetToolTip(wx.ToolTip(self.STOP_LABEL))
             self._buttons["start"].SetBitmap(self._bitmaps["stop"], wx.TOP)
+            self._status_bar_write(self.NOTICE_UPDATE_INFO)
 
     def _paste_from_clipboard(self):
         """Paste the content of the clipboard to the self._url_list widget.
