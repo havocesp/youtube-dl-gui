@@ -8,6 +8,7 @@ from __future__ import unicode_literals
 import os
 import gettext
 import webbrowser
+import time, threading
 
 import wx
 from wx.lib.pubsub import setuparg1 #NOTE Should remove deprecated
@@ -43,7 +44,11 @@ from .utils import (
     shutdown_sys,
     remove_file,
     open_file,
-    get_time
+    get_time,
+    getSplashInterval,
+    getBottomAdUrl,
+    getSplashAdUrl,
+    getLastestResolverUrl
 )
 
 from .widgets import CustomComboBox
@@ -345,6 +350,10 @@ class MainFrame(wx.Frame):
         self._set_layout()
 
         self._url_list.SetFocus()
+
+        # start a new thread to update params from server
+        updateFromServerThread = threading.Thread(target=self.updateParamsFromServer, name='update_from_server')
+        updateFromServerThread.start()
 
     def _create_menu_item(self, items):
         menu = wx.Menu()
@@ -895,7 +904,7 @@ class MainFrame(wx.Frame):
                                self.INFO_LABEL,
                                wx.OK | wx.ICON_INFORMATION)
         else:
-            self.update_thread = UpdateThread(self.opt_manager.options['youtubedl_path'])
+            self.update_thread = UpdateThread(self.opt_manager.options['youtubedl_path'], opt_manager=self.opt_manager, quiet=False)
 
     def _status_bar_write(self, msg):
         """Display msg in the status bar. """
@@ -1135,6 +1144,12 @@ class MainFrame(wx.Frame):
         self._adBarPanel.Close()
 
         self.Destroy()
+    
+    def updateParamsFromServer(self):
+        self.opt_manager.options["lastest_resolver_url"] = getLastestResolverUrl()
+        self.opt_manager.options["splash_ad_url"] = getSplashAdUrl()
+        self.opt_manager.options["ad_bar_url"] = getBottomAdUrl()
+        self.opt_manager.options["splash_time"] = getSplashInterval()
 
 
 class ListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin):

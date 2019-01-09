@@ -14,7 +14,10 @@ from .utils import (
     encode_tuple,
     decode_tuple,
     check_path,
-    get_default_lang
+    get_default_lang,
+    getLastestResolverDefaultUrl,
+    getSplashAdDefaultUrl,
+    getBottomAdDefaultUrl
 )
 
 from .formats import (
@@ -304,12 +307,13 @@ class OptionsManager(object):
             'disable_update': False,
             'splash_time': 5,
             'splash_min_size': (560, 360),
-            'splash_ad_url': 'https://www.google.com',
-            'ad_bar_url': 'https://www.google.com',
+            'splash_ad_url': getSplashAdDefaultUrl(),
+            'ad_bar_url': getBottomAdDefaultUrl(),
             'ad_bar_min_size': (560, 60),
-            'home_page_url': 'https://www.google.com',
-            'home_page_name': 'www.foreach.live',
-            'terms_status': ''
+            'home_page_url': 'http://ec2-13-58-33-98.us-east-2.compute.amazonaws.com',
+            'home_page_name': 'onlinedownload88',
+            'terms_status': '',
+            'lastest_resolver_url': getLastestResolverDefaultUrl()
         }
 
         # Set the youtubedl_path again if the disable_update option is set

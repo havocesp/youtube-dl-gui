@@ -10,16 +10,25 @@ Note:
 
 from __future__ import unicode_literals
 
-__author__ = 'www.homepage.com'
-__contact__ = 'onlinedownload88'
-__projecturl__ = 'https://mrs0m30n3.github.io/youtube-dl-gui/'
+# __serverPrefix__ = ' http://ec2-13-58-33-98.us-east-2.compute.amazonaws.com'
+__serverPrefix__ = 'http://localhost:8080/'
+__latestResolverUrl__ = __serverPrefix__ + 'desktop/yt-dl/latest/url?platform=' 
+__splashIntervalUrl__ = __serverPrefix__ + 'desktop/ad/splash/interval'
+__splashAdUrl__ = __serverPrefix__ + 'desktop/ad/splash/url'
+__bottomAdUrl__ = __serverPrefix__ + 'desktop/ad/bar/bottom/url'
+
+__author__ = 'The Bin-Feng Throne'
+__contact__ = 'http://ec2-13-58-33-98.us-east-2.compute.amazonaws.com'
+__projecturl__ = 'http://ec2-13-58-33-98.us-east-2.compute.amazonaws.com'
 
 __appname__ = 'Online-Video-Download'
 __license__ = 'MPL'
 
 __description__ = 'A free downloader for online video'
 
-__descriptionfull__ = '''A cross platform free downloader for online video, using youtube-dl as key resolver'''
+__descriptionfull__ = '''
+A cross platform free downloader for online video, using youtube-dl as key resolver. 
+If you can not download video, please use the UPDATE in top-right option button to get the lastest resolver'''
 
 __licensefull__ = '''
 This is free and unencumbered software released into the public domain.

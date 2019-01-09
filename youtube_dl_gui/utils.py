@@ -18,6 +18,7 @@ import json
 import math
 import locale
 import subprocess
+import requests
 
 try:
     from twodict import TwoWayOrderedDict
@@ -25,7 +26,14 @@ except ImportError as error:
     print error
     sys.exit(1)
 
-from .info import __appname__
+from .info import (
+    __appname__,
+    __latestResolverUrl__, 
+    __splashIntervalUrl__, 
+    __splashAdUrl__, 
+    __bottomAdUrl__ 
+)
+
 from .version import __version__
 
 
@@ -419,3 +427,78 @@ def hostname():
                         host.close()  
         else:  
                 return 'Unkwon hostname'  
+
+
+def getLastestResolverUrl():
+    sys = os.name  
+    platformType = '1'
+    if sys == 'nt':  
+        platformType = '1'
+    else:
+        platformType = '2'
+    try:
+        url = __latestResolverUrl__ + platformType
+        result = requests.get(url, timeout=5)
+        rCode = result.status_code
+        rContent = result.content
+
+        if rCode==200:
+            return rContent
+        else:
+            return getLastestResolverDefaultUrl()
+
+    except requests.exceptions.RequestException as e:
+        return getLastestResolverDefaultUrl()
+
+
+def getLastestResolverDefaultUrl():
+    return 'https://yt-dl.org/latest/'
+
+
+def getSplashInterval():
+    try:
+        result = requests.get(__splashIntervalUrl__, timeout=5)
+        rCode = result.status_code
+        rContent = result.content
+
+        if rCode==200:
+            return rContent
+        else:
+            return 5
+    except requests.exceptions.RequestException as e:
+        return 5
+
+
+def getSplashAdUrl():
+    try:
+        result = requests.get(__splashAdUrl__, timeout=5)
+        rCode = result.status_code
+        rContent = result.content
+        if rCode==200 and not rContent:
+            return rContent
+        else:
+            return getSplashAdDefaultUrl()
+    except requests.exceptions.RequestException as e:
+        return getSplashAdDefaultUrl()
+
+
+def getSplashAdDefaultUrl():
+    return os.path.join(get_data_dir(), "index.html")
+
+
+def getBottomAdUrl():
+    try:
+        result = requests.get(__bottomAdUrl__, timeout=5)
+        rCode = result.status_code
+        rContent = result.content
+        if rCode==200 and not rContent:
+            return rContent
+        else:
+            return getBottomAdDefaultUrl()
+    except requests.exceptions.RequestException as e:
+        return getBottomAdDefaultUrl()
+
+
+def getBottomAdDefaultUrl():
+    return os.path.join(get_data_dir(), "adBar.html")
+    

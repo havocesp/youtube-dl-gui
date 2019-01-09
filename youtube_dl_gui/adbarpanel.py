@@ -25,7 +25,8 @@ class AdBarPanel(wx.Panel):
         self._optManager = opt_manager
         
         # add main show info
-        defaultAdBarPage = os.path.join(get_data_dir(), "adBar.html")
+        defaultAdBarPage = opt_manager.options["ad_bar_url"]
+        print defaultAdBarPage
 
         self.htmlView = wx.html2.WebView.New(self, url=defaultAdBarPage, size=self._optManager.options["ad_bar_min_size"], 
             backend=wx.html2.WebViewBackendDefault, style=0, 

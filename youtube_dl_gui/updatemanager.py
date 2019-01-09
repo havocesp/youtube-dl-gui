@@ -32,7 +32,6 @@ class UpdateThread(Thread):
     """Python Thread that downloads youtube-dl binary.
 
     Attributes:
-        LATEST_YOUTUBE_DL (string): URL with the latest youtube-dl binary.
         DOWNLOAD_TIMEOUT (int): Download timeout in seconds.
 
     Args:
@@ -44,22 +43,27 @@ class UpdateThread(Thread):
             the UpdateThread has been completed in an asynchronous way.
 
     """
-
-    LATEST_YOUTUBE_DL = 'https://yt-dl.org/latest/'
     DOWNLOAD_TIMEOUT = 10
 
-    def __init__(self, download_path, quiet=False):
+    def __init__(self, download_path, opt_manager, quiet=False):
         super(UpdateThread, self).__init__()
         self.download_path = download_path
         self.quiet = quiet
         self.start()
+        self.optManager = opt_manager;
 
     def run(self):
         self._talk_to_gui('download')
 
-        source_file = self.LATEST_YOUTUBE_DL + YOUTUBEDL_BIN
-        destination_file = os.path.join(self.download_path, YOUTUBEDL_BIN)
+        # get the lastest url from server, as the default url may be blocked by wall
+        source_file = opt_manager.options["lastest_resolver_url"] + YOUTUBEDL_BIN
+        
+        # to remove
+        print source_file
+        return
+        # to remove
 
+        destination_file = os.path.join(self.download_path, YOUTUBEDL_BIN)
         check_path(self.download_path)
 
         try:
