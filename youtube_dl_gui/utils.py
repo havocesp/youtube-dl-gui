@@ -344,8 +344,12 @@ def get_data_dir():
         os.path.join(os_path_dirname(__file__), "data")
     ]
 
+    print 'search dir is : ' + str(search_dirs)
+
     for directory in search_dirs:
+        print 'check ' + str(directory)
         if os_path_exists(directory):
+            print 'return directory is ' + str(directory)
             return directory
 
     return None

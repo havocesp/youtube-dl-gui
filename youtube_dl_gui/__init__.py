@@ -60,6 +60,7 @@ from .utils import (
 # Set config path and create options and log managers
 # config_path = get_config_path()
 config_path = get_data_dir()
+print 'config path is ' + str(config_path)
 
 
 opt_manager = OptionsManager(config_path)

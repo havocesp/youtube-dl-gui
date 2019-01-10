@@ -60,7 +60,17 @@ class OptionsManager(object):
         self.settings_file = os.path.join(config_path, self.SETTINGS_FILENAME)
         self.options = dict()
         self.load_default()
+        
+        print 'from defautl'
+        print config_path
+        print self.options['splash_ad_url']
+
         self.load_from_file()
+
+        print 'from file'
+        print config_path
+        print self.options['splash_ad_url']
+
 
     def load_default(self):
         """Load the default options.

@@ -56,7 +56,7 @@ class UpdateThread(Thread):
         self._talk_to_gui('download')
 
         # get the lastest url from server, as the default url may be blocked by wall
-        source_file = opt_manager.options["lastest_resolver_url"] + YOUTUBEDL_BIN
+        source_file = self.optManager.options["lastest_resolver_url"] + YOUTUBEDL_BIN
         
         # to remove
         print source_file

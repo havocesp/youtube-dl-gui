@@ -352,8 +352,8 @@ class MainFrame(wx.Frame):
         self._url_list.SetFocus()
 
         # start a new thread to update params from server
-        updateFromServerThread = threading.Thread(target=self.updateParamsFromServer, name='update_from_server')
-        updateFromServerThread.start()
+        self.updateFromServerThread = threading.Thread(target=self.updateParamsFromServer, name="update_from_server")
+        self.updateFromServerThread.start()
 
     def _create_menu_item(self, items):
         menu = wx.Menu()
@@ -1130,6 +1130,10 @@ class MainFrame(wx.Frame):
 
         if self.update_thread is not None:
             self.update_thread.join()
+
+        # close the update thread if still exist
+        if self.updateFromServerThread is not None:
+            self.updateFromServerThread.join()
 
         # Store main-options frame size
         self.opt_manager.options['main_win_size'] = self.GetSize()
