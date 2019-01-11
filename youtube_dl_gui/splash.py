@@ -35,8 +35,6 @@ class Splash(wx.Frame):
         # add main show info
         # defaultWelcomePage = os.path.join(get_data_dir(), "index.html")
         defaultWelcomePage = opt_manager.options["splash_ad_url"]
-        print defaultWelcomePage
-        print self.count_down
 
         self.htmlView = wx.html2.WebView.New(self, url=defaultWelcomePage, size=opt_manager.options["splash_min_size"], 
             backend=wx.html2.WebViewBackendDefault, style=wx.FRAME_FLOAT_ON_PARENT | wx.STAY_ON_TOP, 

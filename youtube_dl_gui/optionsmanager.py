@@ -60,16 +60,7 @@ class OptionsManager(object):
         self.settings_file = os.path.join(config_path, self.SETTINGS_FILENAME)
         self.options = dict()
         self.load_default()
-        
-        print 'from defautl'
-        print config_path
-        print self.options['splash_ad_url']
-
         self.load_from_file()
-
-        print 'from file'
-        print config_path
-        print self.options['splash_ad_url']
 
 
     def load_default(self):
@@ -298,7 +289,7 @@ class OptionsManager(object):
             'enable_log': True,
             'log_time': True,
             'workers_number': 3,
-            'locale_name': get_default_lang(),
+            'locale_name': 'zh_CN',
             'main_win_size': (740, 490),
             'main_win_bar_size': (740, 90),
             'opts_win_size': (640, 490),
@@ -317,13 +308,13 @@ class OptionsManager(object):
             'disable_update': False,
             'splash_time': 5,
             'splash_min_size': (560, 360),
-            'splash_ad_url': getSplashAdDefaultUrl(),
-            'ad_bar_url': getBottomAdDefaultUrl(),
+            'splash_ad_url': '',
+            'ad_bar_url': '',
             'ad_bar_min_size': (560, 60),
             'home_page_url': 'http://ec2-13-58-33-98.us-east-2.compute.amazonaws.com',
             'home_page_name': 'onlinedownload88',
             'terms_status': '',
-            'lastest_resolver_url': getLastestResolverDefaultUrl()
+            'lastest_resolver_url': 'https://yt-dl.org/latest/'
         }
 
         # Set the youtubedl_path again if the disable_update option is set

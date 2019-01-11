@@ -3,7 +3,9 @@
 
 import requests
 import time, threading
+import os
 from urllib2 import urlopen, URLError, HTTPError
+
 
 def getLastestUrl():
     url = 'http://localhost:8080/desktop/yt-dl/latest/url?platform=1'
@@ -79,4 +81,15 @@ def startThread():
     t3.start()
 
 if __name__=='__main__':
-    startThread()
+    # startThread()
+    print 'absolute is ' + str(os.path.exists('/Users/hzhu2/Documents/workspace/youtube-dl-gui/data'))
+    print 'relative is ' + str(os.path.exists('youtube_dl_gui/data'))
+
+    url = ''
+    print 'judge not is ' + str( not url)
+
+    if url=='':
+        print 'judge is ' + str( url )
+
+    if url!='':
+        print 'judge is not ' + str( url )

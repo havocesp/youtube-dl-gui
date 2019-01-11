@@ -28,6 +28,10 @@ from .updatemanager import (
     UpdateThread
 )
 
+from .serverparammanager import(
+    ServerParamThread
+)
+
 from .downloadmanager import (
     MANAGER_PUB_TOPIC,
     WORKER_PUB_TOPIC,
@@ -352,8 +356,10 @@ class MainFrame(wx.Frame):
         self._url_list.SetFocus()
 
         # start a new thread to update params from server
-        self.updateFromServerThread = threading.Thread(target=self.updateParamsFromServer, name="update_from_server")
-        self.updateFromServerThread.start()
+        self.updateFromServerThread = ServerParamThread(self.opt_manager)
+
+        # decide the panel display status
+        self._decideAdBarDisplayStatus()
 
     def _create_menu_item(self, items):
         menu = wx.Menu()
@@ -1148,12 +1154,10 @@ class MainFrame(wx.Frame):
         self._adBarPanel.Close()
 
         self.Destroy()
-    
-    def updateParamsFromServer(self):
-        self.opt_manager.options["lastest_resolver_url"] = getLastestResolverUrl()
-        self.opt_manager.options["splash_ad_url"] = getSplashAdUrl()
-        self.opt_manager.options["ad_bar_url"] = getBottomAdUrl()
-        self.opt_manager.options["splash_time"] = getSplashInterval()
+
+    def _decideAdBarDisplayStatus(self):
+        if self.opt_manager.options["ad_bar_url"] == '':
+            self._adBarPanel._removeAdBar()
 
 
 class ListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin):

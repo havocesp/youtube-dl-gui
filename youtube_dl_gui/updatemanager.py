@@ -49,8 +49,8 @@ class UpdateThread(Thread):
         super(UpdateThread, self).__init__()
         self.download_path = download_path
         self.quiet = quiet
-        self.start()
         self.optManager = opt_manager;
+        self.start()
 
     def run(self):
         self._talk_to_gui('download')
@@ -58,11 +58,6 @@ class UpdateThread(Thread):
         # get the lastest url from server, as the default url may be blocked by wall
         source_file = self.optManager.options["lastest_resolver_url"] + YOUTUBEDL_BIN
         
-        # to remove
-        print source_file
-        return
-        # to remove
-
         destination_file = os.path.join(self.download_path, YOUTUBEDL_BIN)
         check_path(self.download_path)
 

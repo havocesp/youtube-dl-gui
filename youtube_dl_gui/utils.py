@@ -182,6 +182,7 @@ def decode_tuple(encoded_tuple):
 def check_path(path):
     """Create path if not exist. """
     if not os_path_exists(path):
+        print 'try to create ' + str(path)
         os_makedirs(path)
 
 
@@ -344,12 +345,8 @@ def get_data_dir():
         os.path.join(os_path_dirname(__file__), "data")
     ]
 
-    print 'search dir is : ' + str(search_dirs)
-
     for directory in search_dirs:
-        print 'check ' + str(directory)
         if os_path_exists(directory):
-            print 'return directory is ' + str(directory)
             return directory
 
     return None
@@ -411,7 +408,7 @@ def get_default_lang():
     default_lang, _ = locale_getdefaultlocale()
 
     if not default_lang:
-        default_lang = "zh_CN"
+        default_lang = 'zh_CN'
 
     return default_lang
 
@@ -466,7 +463,7 @@ def getSplashInterval():
         rContent = result.content
 
         if rCode==200:
-            return rContent
+            return int(rContent)
         else:
             return 5
     except requests.exceptions.RequestException as e:
@@ -478,7 +475,8 @@ def getSplashAdUrl():
         result = requests.get(__splashAdUrl__, timeout=5)
         rCode = result.status_code
         rContent = result.content
-        if rCode==200 and not rContent:
+
+        if rCode==200 and rContent!='':
             return rContent
         else:
             return getSplashAdDefaultUrl()
@@ -495,7 +493,8 @@ def getBottomAdUrl():
         result = requests.get(__bottomAdUrl__, timeout=5)
         rCode = result.status_code
         rContent = result.content
-        if rCode==200 and not rContent:
+
+        if rCode==200 and rContent!='':
             return rContent
         else:
             return getBottomAdDefaultUrl()
@@ -504,5 +503,7 @@ def getBottomAdUrl():
 
 
 def getBottomAdDefaultUrl():
-    return os.path.join(get_data_dir(), "adBar.html")
+    # return os.path.join(get_data_dir(), "adBar.html")
+    return ''  # by default, should not display the ad bar
+    
     
