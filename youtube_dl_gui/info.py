@@ -10,7 +10,7 @@ Note:
 
 from __future__ import unicode_literals
 
-# __serverPrefix__ = ' http://ec2-13-58-33-98.us-east-2.compute.amazonaws.com'
+# __serverPrefix__ = 'http://ec2-13-58-33-98.us-east-2.compute.amazonaws.com'
 __serverPrefix__ = 'http://localhost:8080/'
 __latestResolverUrl__ = __serverPrefix__ + 'desktop/yt-dl/latest/url?platform=' 
 __splashIntervalUrl__ = __serverPrefix__ + 'desktop/ad/splash/interval'

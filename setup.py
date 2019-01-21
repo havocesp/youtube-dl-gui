@@ -220,7 +220,8 @@ def linux_setup():
     # Add pixmaps icons (*.png) & i18n files
     package_data[__packagename__] = [
         "data/pixmaps/*.png",
-        "locale/*/LC_MESSAGES/*.mo"
+        "locale/*/LC_MESSAGES/*.mo",
+        "data/*"
     ]
 
     # Add scripts
@@ -242,7 +243,8 @@ def windows_setup():
         # Add pixmaps icons (*.png) & i18n files
         package_data[__packagename__] = [
             "data\\pixmaps\\*.png",
-            "locale\\*\\LC_MESSAGES\\*.mo"
+            "locale\\*\\LC_MESSAGES\\*.mo",
+            "data\\*"
         ]
 
         setup_params = {
