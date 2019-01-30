@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import requests
+import json
 import time, threading
 import os
 from urllib2 import urlopen, URLError, HTTPError
@@ -80,16 +81,32 @@ def startThread():
     t3 = threading.Thread(target=getBottomAdStatus, name='bottom_url')
     t3.start()
 
+def sendStatis():
+    try:
+        payload = {'ipAddress': '255.255.255.255', 'splashInterval': 5, 'useDuration':100}
+        header = {'Content-Type': 'application/json'}
+
+        result = requests.post("http://localhost:8080/desktop/statistic/simple", headers=header, data=json.dumps(payload), timeout=5)
+        rCode = result.status_code
+        rContent = result.content
+
+        print str(rCode)
+        print str(rContent)
+    except requests.exceptions.RequestException as e:
+        print "error for : " + str(e)
+
+
 if __name__=='__main__':
+    sendStatis()
     # startThread()
-    print 'absolute is ' + str(os.path.exists('/Users/hzhu2/Documents/workspace/youtube-dl-gui/data'))
-    print 'relative is ' + str(os.path.exists('youtube_dl_gui/data'))
+    # print 'absolute is ' + str(os.path.exists('/Users/hzhu2/Documents/workspace/youtube-dl-gui/data'))
+    # print 'relative is ' + str(os.path.exists('youtube_dl_gui/data'))
 
-    url = ''
-    print 'judge not is ' + str( not url)
+    # url = ''
+    # print 'judge not is ' + str( not url)
 
-    if url=='':
-        print 'judge is ' + str( url )
+    # if url=='':
+    #     print 'judge is ' + str( url )
 
-    if url!='':
-        print 'judge is not ' + str( url )
+    # if url!='':
+    #     print 'judge is not ' + str( url )
