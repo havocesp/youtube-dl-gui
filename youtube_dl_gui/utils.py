@@ -305,7 +305,7 @@ def get_icon_file():
         The path to youtube-dlg icon file if exists, else returns None.
 
     """
-    ICON_NAME = "youtube-dl-gui.png"
+    ICON_NAME = "onlinedownload88.png"
 
     pixmaps_dir = get_pixmaps_dir()
 

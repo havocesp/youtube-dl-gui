@@ -15,7 +15,7 @@ appAllPath=[
 ]
 
 
-a = Analysis(['MyApp.py'],
+a = Analysis(['VideoDownloader.py'],
              pathex=appAllPath,
              binaries=[],
              datas = appData,
@@ -33,21 +33,21 @@ exe = EXE(pyz,
           a.scripts,
           [],
           exclude_binaries=True,
-          name='MyApp',
+          name='VideoDownloader',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=True )
+          console=False )
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
                a.datas,
                strip=False,
                upx=True,
-               name='MyApp')
+               name='VideoDownloader')
 
 app = BUNDLE(coll,
-            name='MyApp.app',
-            icon=None,
+            name='VideoDownloader.app',
+            icon='C:\\workspace\\youtube-dl-gui\\youtube_dl_gui\\data\\pixmaps\\onlinedownload88.ico',
             bundle_identifier=None)
