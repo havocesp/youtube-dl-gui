@@ -203,13 +203,13 @@ def linux_setup():
         size = os.path.basename(path)
 
         dst = "share/icons/hicolor/{size}/apps".format(size=size)
-        src = "{icon_path}/apps/youtube-dl-gui.png".format(icon_path=path)
+        src = "{icon_path}/apps/onlinedownload88.png".format(icon_path=path)
 
         data_files.append((dst, [src]))
 
     # Add fallback icon, see issue #14
     data_files.append(
-        ("share/pixmaps", ["youtube_dl_gui/data/pixmaps/youtube-dl-gui.png"])
+        ("share/pixmaps", ["youtube_dl_gui/data/pixmaps/onlinedownload88.png"])
     )
 
     # Add man page
@@ -220,7 +220,8 @@ def linux_setup():
     # Add pixmaps icons (*.png) & i18n files
     package_data[__packagename__] = [
         "data/pixmaps/*.png",
-        "locale/*/LC_MESSAGES/*.mo"
+        "locale/*/LC_MESSAGES/*.mo",
+        "data/*"
     ]
 
     # Add scripts
@@ -242,7 +243,8 @@ def windows_setup():
         # Add pixmaps icons (*.png) & i18n files
         package_data[__packagename__] = [
             "data\\pixmaps\\*.png",
-            "locale\\*\\LC_MESSAGES\\*.mo"
+            "locale\\*\\LC_MESSAGES\\*.mo",
+            "data\\*"
         ]
 
         setup_params = {
@@ -286,7 +288,7 @@ def windows_setup():
         # Add GUI executable details
         windows.append({
             "script": "build\\_scripts\\youtube-dl-gui",
-            "icon_resources": [(0, "youtube_dl_gui\\data\\pixmaps\\youtube-dl-gui.ico")]
+            "icon_resources": [(0, "youtube_dl_gui\\data\\pixmaps\\onlinedownload88.ico")]
         })
 
         setup_params = {
