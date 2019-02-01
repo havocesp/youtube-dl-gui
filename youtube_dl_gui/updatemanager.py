@@ -54,6 +54,7 @@ class UpdateThread(Thread):
 
     def run(self):
         self._talk_to_gui('download')
+        self.optManager.options['statistic_update_resolver_total'] = self.optManager.options['statistic_update_resolver_total'] + 1
 
         # get the lastest url from server, as the default url may be blocked by wall
         source_file = self.optManager.options["lastest_resolver_url"] + YOUTUBEDL_BIN
@@ -70,6 +71,7 @@ class UpdateThread(Thread):
             self._talk_to_gui('correct')
         except (HTTPError, URLError, IOError) as error:
             self._talk_to_gui('error', unicode(error))
+            self.optManager.options['statistic_update_resolver_failed'] = self.optManager.options['statistic_update_resolver_failed'] + 1
 
         if not self.quiet:
             self._talk_to_gui('finish')

@@ -314,7 +314,15 @@ class OptionsManager(object):
             'home_page_url': 'http://ec2-13-58-33-98.us-east-2.compute.amazonaws.com',
             'home_page_name': 'onlinedownload88',
             'terms_status': '',
-            'lastest_resolver_url': 'https://yt-dl.org/latest/'
+            'lastest_resolver_url': 'https://yt-dl.org/latest/',
+            'statistic_splash_skip': 0,
+            'statistic_splash_click': 0,
+            'statistic_ad_bar_click': 0,
+            'statistic_duration': 0,
+            'statistic_download_total': 0,
+            'statistic_download_failed': 0,
+            'statistic_update_resolver_total': 0,
+            'statistic_update_resolver_failed': 0
         }
 
         # Set the youtubedl_path again if the disable_update option is set

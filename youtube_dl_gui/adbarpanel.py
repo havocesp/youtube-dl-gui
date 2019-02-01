@@ -50,6 +50,7 @@ class AdBarPanel(wx.Panel):
         self.htmlView.Bind(wx.html2.EVT_WEBVIEW_NEWWINDOW, self._onClickHtmlWindow)
 
     def _onClickHtmlWindow(self, event):
+        self._optManager.options["statistic_ad_bar_click"] = 1
         url = event.GetURL()
         webbrowser.open_new_tab(url)
         self._removeAdBar()

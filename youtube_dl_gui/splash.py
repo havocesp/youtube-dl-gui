@@ -90,6 +90,7 @@ class Splash(wx.Frame):
             self._close()
 
     def _quickSkip(self, event):
+        self.optManager.options["statistic_splash_skip"] = 1
         self._close()
 
     def _close(self):
@@ -106,6 +107,7 @@ class Splash(wx.Frame):
         self.htmlView.Bind(wx.html2.EVT_WEBVIEW_NEWWINDOW, self._onClickHtmlWindow)
 
     def _onClickHtmlWindow(self, event):
+        self.optManager.options["statistic_splash_click"] = 1
         url = event.GetURL()
         webbrowser.open_new_tab(url)
         self._close()

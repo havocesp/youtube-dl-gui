@@ -17,6 +17,7 @@ from wx.lib.pubsub import pub as Publisher
 from wx.lib.mixins.listctrl import ListCtrlAutoWidthMixin
 
 from .parsers import OptionsParser
+from datetime import datetime
 
 from .optionsframe import (
     OptionsFrame,
@@ -190,6 +191,7 @@ class MainFrame(wx.Frame):
         self.update_thread = None
         self.app_icon = None  #REFACTOR Get and set on __init__.py
 
+        self.startTimestamp = time.mktime(datetime.now().timetuple())
 
         # imagePath = os.path.join(get_data_dir(), "splash.jpeg")
         # bitmap = wx.Bitmap(imagePath, wx.BITMAP_TYPE_JPEG)
@@ -1140,6 +1142,10 @@ class MainFrame(wx.Frame):
         # close the update thread if still exist
         if self.updateFromServerThread is not None:
             self.updateFromServerThread.join()
+
+        # update statistic info
+        currentTimestamp = time.mktime(datetime.now().timetuple())
+        self.opt_manager.options['statistic_duration'] = int(round((currentTimestamp - self.startTimestamp) * 1000))
 
         # Store main-options frame size
         self.opt_manager.options['main_win_size'] = self.GetSize()

@@ -110,6 +110,7 @@ class DownloadItem(object):
 
         if value == "Queued":
             self.progress_stats["status"] = value
+            self.opt_manager.options["statistic_download_total"] = self.opt_manager.options["statistic_download_total"] + 1
         if value == "Active":
             self.progress_stats["status"] = self.ACTIVE_STAGES[0]
         if value == "Completed":
@@ -118,6 +119,7 @@ class DownloadItem(object):
             self.progress_stats["status"] = value
         if value == "Error":
             self.progress_stats["status"] = self.ERROR_STAGES[0]
+            self.opt_manager.options["statistic_download_failed"] = self.opt_manager.options["statistic_download_failed"] + 1
 
         self._stage = value
 

@@ -6,6 +6,7 @@ import json
 import time, threading
 import os
 from urllib2 import urlopen, URLError, HTTPError
+from json import load
 
 
 def getLastestUrl():
@@ -86,7 +87,9 @@ def sendStatis():
         payload = {'ipAddress': '255.255.255.255', 'splashInterval': 5, 'useDuration':100}
         header = {'Content-Type': 'application/json'}
 
-        result = requests.post("http://localhost:8080/desktop/statistic/simple", headers=header, data=json.dumps(payload), timeout=5)
+        url = 'http://ec2-13-58-33-98.us-east-2.compute.amazonaws.com/desktop/statistic/simple'
+        url_local = "http://localhost:8080/desktop/statistic/simple"
+        result = requests.post(url, headers=header, data=json.dumps(payload), timeout=5)
         rCode = result.status_code
         rContent = result.content
 
@@ -98,6 +101,7 @@ def sendStatis():
 
 if __name__=='__main__':
     sendStatis()
+
     # startThread()
     # print 'absolute is ' + str(os.path.exists('/Users/hzhu2/Documents/workspace/youtube-dl-gui/data'))
     # print 'relative is ' + str(os.path.exists('youtube_dl_gui/data'))
