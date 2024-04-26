@@ -59,7 +59,7 @@ class OptionHolder(object):
         if self.requirements is None:
             return True
 
-        return any([options_dict[req] for req in self.requirements])
+        return any(options_dict[req] for req in self.requirements)
 
 
 class OptionsParser(object):
