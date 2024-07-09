@@ -22,6 +22,7 @@ from Queue import Queue
 from threading import Thread
 
 from .utils import convert_item
+from security import safe_command
 
 
 class PipeReader(Thread):
@@ -345,7 +346,7 @@ class YoutubeDLDownloader(object):
             cmd = convert_item(cmd, to_unicode=False)
 
         try:
-            self._proc = subprocess.Popen(cmd,
+            self._proc = safe_command.run(subprocess.Popen, cmd,
                                           stdout=subprocess.PIPE,
                                           stderr=subprocess.PIPE,
                                           preexec_fn=preexec,
