@@ -60,6 +60,7 @@ import sys
 import glob
 from shutil import copyfile
 from subprocess import call
+from security import safe_command
 
 PY2EXE = len(sys.argv) >= 2 and sys.argv[1] == "py2exe"
 
@@ -133,7 +134,7 @@ class BuildTranslations(cmd.Command):
 
             try:
                 log.info("building MO file for '{}'".format(po_file))
-                call([self.exec_name, "-o", mo_file, po_file])
+                safe_command.run(call, [self.exec_name, "-o", mo_file, po_file])
             except OSError:
                 log.error("could not locate file '{}', exiting...".format(self.exec_name))
                 sys.exit(1)
